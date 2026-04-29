@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataMobile Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+```
+<header>
+    <h1>📊 DataMobile Dashboard</h1>
+    <p>Posse de telefone móvel celular para uso pessoal - 2005</p>
+</header>
+
+<main class="container">
+
+    <section class="cards">
+        <div class="card">
+            <h3>Total de Registros</h3>
+            <span id="total">0</span>
+        </div>
+
+        <div class="card">
+            <h3>Maior posse do Brasil</h3>
+            <span id="max">0</span>
+        </div>
+    </section>
+
+    <section class="table-section">
+        <h2>Dados por Faixa Etária</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Grupo Idade</th>
+                    <th>Brasil</th>
+                    <th>Norte</th>
+                    <th>Nordeste</th>
+                    <th>Sudeste</th>
+                    <th>Sul</th>
+                    <th>Centro-Oeste</th>
+                </tr>
+            </thead>
+
+            <tbody id="tabela-body">
+            </tbody>
+        </table>
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

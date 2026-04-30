@@ -1,5 +1,6 @@
 from django.db import models
 
+# Entity
 class CensoCelular(models.Model):
 
     id = models.BigAutoField(primary_key=True)

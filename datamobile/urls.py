@@ -6,6 +6,8 @@ from .views import CensoCelularView
 
 from .views import SummaryView
 
+from .views import RankingRegioesView
+
 
 # lista de rotas da app
 urlpatterns = [
@@ -20,4 +22,9 @@ urlpatterns = [
         "summary/", 
         SummaryView.as_view()
         ),
+
+    path(
+        "ranking/",
+        RankingRegioesView.as_view()
+    )
 ]

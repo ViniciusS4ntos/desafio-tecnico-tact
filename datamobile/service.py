@@ -49,7 +49,34 @@ def get_summary():
     }
 
 def get_ranking_regioes():
-    pass
+    dados = CensoCelular.objects.all()
+
+    total = None
+
+    for item in dados:
+        nome = item.grupo_idade.strip().lower()
+
+        if nome == "total":
+            total = item
+            break
+
+    if total is None:
+        return []
+
+    ranking = [
+        {"regiao": "Norte", "total": total.norte or 0},
+        {"regiao": "Nordeste", "total": total.nordeste or 0},
+        {"regiao": "Sudeste", "total": total.sudeste or 0},
+        {"regiao": "Sul", "total": total.sul or 0},
+        {"regiao": "Centro-Oeste", "total": total.centro_oeste or 0},
+    ]
+
+    ranking.sort(
+        key=lambda item: item["total"],
+        reverse=True
+    )
+
+    return ranking
 
 def get_participacao_percentual():
     pass

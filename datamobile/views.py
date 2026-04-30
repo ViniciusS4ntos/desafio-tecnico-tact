@@ -9,7 +9,7 @@ from rest_framework.response import Response
 # importa nosso model que representa a tabela censo_celular
 from .models import CensoCelular
 
-from .service import get_summary
+from .service import get_summary, get_ranking_regioes
 
 
 
@@ -28,6 +28,10 @@ class SummaryView(APIView):
 
     def get(self, request):
         return Response(get_summary())
+    
+class RankingRegioesView(APIView):
+    def get(self, request):
+        return Response(get_ranking_regioes())
 
     
     

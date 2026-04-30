@@ -12,7 +12,9 @@ from .views import HeatmapView
 
 from .views import ParticipacaoPercentualView
 
-from .views import DominanteRegiao
+from .views import DominanteRegiaoView
+
+from .views import DashboardBuildView
 
 
 # lista de rotas da app
@@ -46,6 +48,11 @@ urlpatterns = [
 
     path(
         "dominante-regiao/",
-        DominanteRegiao.as_view()
-        )
+        DominanteRegiaoView.as_view()
+        ),
+
+    path("dashboard/",
+         DashboardBuildView.as_view()
+         )
+
 ]

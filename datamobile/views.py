@@ -9,6 +9,8 @@ from rest_framework.response import Response
 # importa nosso model que representa a tabela censo_celular
 from .models import CensoCelular
 
+from .service import get_summary
+
 
 
 class CensoCelularView(APIView):
@@ -21,3 +23,11 @@ class CensoCelularView(APIView):
             "total_registros" : dados.count(),
             "dados": list(dados)
         })
+    
+class SummaryView(APIView):
+
+    def get(self, request):
+        return Response(get_summary())
+
+    
+    

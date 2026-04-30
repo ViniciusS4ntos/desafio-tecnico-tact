@@ -1,7 +1,16 @@
 from .models import CensoCelular
 
+def get_censo():
+        # Buscar no banco todos os dados
+        dados = CensoCelular.objects.all().values()
 
-def get_summary():
+        # retorna os dados
+        return ({
+            "total_registros" : dados.count(),
+            "dados": list(dados)
+        })
+
+def get_summary(): # feito
     dados = CensoCelular.objects.all()
 
     total = None
@@ -48,7 +57,7 @@ def get_summary():
         "faixaLider": faixa_lider,
     }
 
-def get_ranking_regioes():
+def get_ranking_regioes(): # feito
     dados = CensoCelular.objects.all()
 
     total = None
@@ -78,10 +87,53 @@ def get_ranking_regioes():
 
     return ranking
 
-def get_participacao_percentual():
-    pass
+def get_participacao_percentual(): # feito
+    dados = CensoCelular.objects.all()
 
-def get_heatmap():
+    total = None
+
+    # achar linha Total
+    for item in dados:
+        nome = item.grupo_idade.strip().lower()
+
+        if nome == "total":
+            total = item
+            break
+
+    if total is None:
+        return []
+    
+    total_brasil = total.brasil or 0
+
+    if total_brasil == 0:
+        return []
+        
+    regioes = [
+    ("Norte", total.norte or 0),
+    ("Nordeste", total.nordeste or 0),
+    ("Sudeste", total.sudeste or 0),
+    ("Sul", total.sul or 0),
+    ("Centro-Oeste", total.centro_oeste or 0),
+    ]
+
+    participacao = []
+
+    for nome_regiao, valor in regioes:
+        percentual = round((valor / total_brasil) * 100, 2)
+
+        participacao.append({
+            "regiao": nome_regiao,
+            "percentual": percentual
+        })
+
+    participacao.sort(
+        key=lambda item: item["percentual"],
+        reverse=True
+    )
+
+    return participacao
+
+def get_heatmap(): # feito
     dados = CensoCelular.objects.all()
 
     heatmap = []
@@ -112,18 +164,71 @@ def get_heatmap():
 
     return heatmap
 
-def get_indice_relativo():
-    pass
+def get_dominante_por_regiao(): # feito
+    dados = CensoCelular.objects.all()
 
-def get_dominante_por_regiao():
-    pass
+    capturando = False
+    faixas = []
 
-def build_dashboard():
+    # pega somente faixa geral
+    for item in dados:
+        nome = item.grupo_idade.strip().lower()
+
+        if nome == "total":
+            capturando = True
+            continue
+
+        if nome == "homens":
+            break
+
+        if capturando:
+            faixas.append(item)
+
+    if not faixas:
+        return []
+
+    regioes = {
+        "Norte": ("", 0),
+        "Nordeste": ("", 0),
+        "Sudeste": ("", 0),
+        "Sul": ("", 0),
+        "Centro-Oeste": ("", 0),
+    }
+
+    for item in faixas:
+        valores = {
+            "Norte": item.norte or 0,
+            "Nordeste": item.nordeste or 0,
+            "Sudeste": item.sudeste or 0,
+            "Sul": item.sul or 0,
+            "Centro-Oeste": item.centro_oeste or 0,
+        }
+
+        for regiao, valor in valores.items():
+            maior_atual = regioes[regiao][1]
+
+            if valor > maior_atual:
+                regioes[regiao] = (
+                    item.grupo_idade,
+                    valor
+                )
+
+    resultado = []
+
+    for regiao, info in regioes.items():
+        resultado.append({
+            "regiao": regiao,
+            "faixaDominante": info[0],
+            "totalPosses" : info[1]
+        })
+
+    return resultado
+
+def build_dashboard(): # feito
     return {
         "summary": get_summary(),
         "rankingRegioes": get_ranking_regioes(),
         "participacaoPercentual": get_participacao_percentual(),
         "heatmap": get_heatmap(),
-        "indiceRelativo": get_indice_relativo(),
         "dominantePorRegiao": get_dominante_por_regiao(),
     }

@@ -9,20 +9,13 @@ from rest_framework.response import Response
 # importa nosso model que representa a tabela censo_celular
 from .models import CensoCelular
 
-from .service import get_summary, get_ranking_regioes, get_heatmap
+from .service import get_summary, get_ranking_regioes, get_heatmap, get_participacao_percentual, get_dominante_por_regiao, get_censo
 
 
 
 class CensoCelularView(APIView):
     def get(self, request):
-        # Buscar no banco todos os dados
-        dados = CensoCelular.objects.all().values()
-
-        # retorna os dados
-        return Response({
-            "total_registros" : dados.count(),
-            "dados": list(dados)
-        })
+        return Response(get_censo())
     
 class SummaryView(APIView):
 
@@ -36,6 +29,14 @@ class RankingRegioesView(APIView):
 class HeatmapView(APIView):
     def get(self, request):
         return Response(get_heatmap())
+    
+class ParticipacaoPercentualView(APIView):
+    def get(self, request):
+        return Response(get_participacao_percentual())
+    
+class DominanteRegiao(APIView):
+    def get(self, request):
+        return Response(get_dominante_por_regiao())
 
     
     

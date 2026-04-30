@@ -10,7 +10,7 @@ def get_censo():
             "dados": list(dados)
         })
 
-def get_summary(): # feito
+def get_summary():
     dados = CensoCelular.objects.all()
 
     total = None
@@ -57,7 +57,7 @@ def get_summary(): # feito
         "faixaLider": faixa_lider,
     }
 
-def get_ranking_regioes(): # feito
+def get_ranking_regioes(): 
     dados = CensoCelular.objects.all()
 
     total = None
@@ -87,7 +87,7 @@ def get_ranking_regioes(): # feito
 
     return ranking
 
-def get_participacao_percentual(): # feito
+def get_participacao_percentual(): 
     dados = CensoCelular.objects.all()
 
     total = None
@@ -133,7 +133,7 @@ def get_participacao_percentual(): # feito
 
     return participacao
 
-def get_heatmap(): # feito
+def get_heatmap(): 
     dados = CensoCelular.objects.all()
 
     heatmap = []
@@ -164,7 +164,7 @@ def get_heatmap(): # feito
 
     return heatmap
 
-def get_dominante_por_regiao(): # feito
+def get_dominante_por_regiao(): 
     dados = CensoCelular.objects.all()
 
     capturando = False
@@ -224,7 +224,7 @@ def get_dominante_por_regiao(): # feito
 
     return resultado
 
-def build_dashboard(): # feito
+def build_dashboard(): 
     return {
         "summary": get_summary(),
         "rankingRegioes": get_ranking_regioes(),

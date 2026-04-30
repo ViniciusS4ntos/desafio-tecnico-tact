@@ -8,6 +8,8 @@ from .views import SummaryView
 
 from .views import RankingRegioesView
 
+from .views import HeatmapView
+
 
 # lista de rotas da app
 urlpatterns = [
@@ -26,5 +28,10 @@ urlpatterns = [
     path(
         "ranking/",
         RankingRegioesView.as_view()
+    ),
+
+    path(
+        "heatmap/",
+        HeatmapView.as_view()
     )
 ]

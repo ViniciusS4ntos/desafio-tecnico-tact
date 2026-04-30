@@ -82,7 +82,35 @@ def get_participacao_percentual():
     pass
 
 def get_heatmap():
-    pass
+    dados = CensoCelular.objects.all()
+
+    heatmap = []
+    capturando = False
+
+    for item in dados:
+        nome = item.grupo_idade.strip().lower()
+
+        # começa após Total
+        if nome == "total":
+            capturando = True
+            continue
+
+        # parou quando chegou em Homens
+        if nome == "homens":
+            break
+
+        # só captura faixa etária geral
+        if capturando:
+            heatmap.append({
+                "faixaEtaria": item.grupo_idade,
+                "norte": item.norte or 0,
+                "nordeste": item.nordeste or 0,
+                "sudeste": item.sudeste or 0,
+                "sul": item.sul or 0,
+                "centroOeste": item.centro_oeste or 0,
+            })
+
+    return heatmap
 
 def get_indice_relativo():
     pass

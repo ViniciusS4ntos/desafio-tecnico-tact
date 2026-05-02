@@ -24,8 +24,8 @@ class Migration(migrations.Migration):
                 ('centro_oeste', models.BigIntegerField()),
             ],
             options={
-                'db_table': 'censo_celular',
-                'managed': False,
+                'db_table': 'posse_celular_2005',
+                'managed': True,
             },
         ),
     ]

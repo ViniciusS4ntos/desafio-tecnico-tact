@@ -26,7 +26,7 @@ API REST desenvolvida em Django que processa e disponibiliza dados do IBGE sobre
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/desafio-tecnico-tact.git
+git clone https://github.com/ViniciusS4ntos/desafio-tecnico-tact.git
 cd desafio-tecnico-tact
 
 # Suba os containers

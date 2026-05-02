@@ -1,0 +1,29 @@
+from django.db import migrations, models
+
+
+class Migration(migrations.Migration):
+
+    initial = True
+
+    dependencies = [
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='CensoCelular',
+            fields=[
+                ('id', models.BigIntegerField(primary_key=True, serialize=False)),
+                ('grupo_idade', models.CharField()),
+                ('brasil', models.BigIntegerField()),
+                ('norte', models.BigIntegerField()),
+                ('nordeste', models.BigIntegerField()),
+                ('sudeste', models.BigIntegerField()),
+                ('sul', models.BigIntegerField()),
+                ('centro_oeste', models.BigIntegerField()),
+            ],
+            options={
+                'db_table': 'censo_celular',  
+                'managed': True,
+            },
+        ),
+    ]

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Censo Celular 2005 — Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-title">CENSO CELULAR</div>
+    <div class="logo-sub">IBGE · Brasil 2005</div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-label">MENU</div>
+    <div class="nav-item active" data-page="overview">
+      <span class="nav-icon">◈</span> Visão Geral
+    </div>
+    <div class="nav-item" data-page="regioes">
+      <span class="nav-icon">◉</span> Regiões
+    </div>
+    <div class="nav-item" data-page="faixas">
+      <span class="nav-icon">▦</span> Faixas Etárias
+    </div>
+    <div class="nav-item" data-page="endpoints">
+      <span class="nav-icon">⌥</span> Endpoints
+    </div>
+  </nav>
+
+</aside>
+
+<main class="main">
+
+  <div id="page-overview" class="page active">
+    <div class="page-header">
+      <div>
+        <div class="page-title">Visão Geral</div>
+        <div class="page-desc">Pessoas com celular para uso pessoal</div>
+      </div>
+      <button class="refresh-btn" id="refresh-btn" onclick="loadAll()">
+        <span class="icon">↺</span> Atualizar
+      </button>
+    </div>
+
+    <div class="metrics">
+      <div class="metric-card blue">
+        <div class="metric-label">TOTAL BRASIL</div>
+        <div class="metric-value" id="m-total">—</div>
+        <div class="metric-sub">usuários de celular</div>
+      </div>
+      <div class="metric-card purple">
+        <div class="metric-label">REGIÃO LÍDER</div>
+        <div class="metric-value" id="m-regiao">—</div>
+        <div class="metric-sub">maior cobertura</div>
+      </div>
+      <div class="metric-card green">
+        <div class="metric-label">FAIXA DOMINANTE</div>
+        <div class="metric-value" id="m-faixa">—</div>
+        <div class="metric-sub">grupo etário líder</div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">RANKING DE REGIÕES</div>
+        <div id="ranking-chart">
+          <div class="skeleton" style="margin-bottom:12px;"></div>
+          <div class="skeleton" style="margin-bottom:12px;width:85%"></div>
+          <div class="skeleton" style="margin-bottom:12px;width:70%"></div>
+          <div class="skeleton" style="margin-bottom:12px;width:55%"></div>
+          <div class="skeleton" style="width:35%"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">PARTICIPAÇÃO PERCENTUAL</div>
+        <div id="donut-wrap">
+          <div class="loading-text" style="color:var(--muted);font-size:13px;padding:40px 0;text-align:center;">carregando...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">FAIXA ETÁRIA DOMINANTE POR REGIÃO</div>
+      <div class="dom-grid" id="dominante-grid">
+        <div class="skeleton" style="height:90px;border-radius:12px;"></div>
+        <div class="skeleton" style="height:90px;border-radius:12px;"></div>
+        <div class="skeleton" style="height:90px;border-radius:12px;"></div>
+        <div class="skeleton" style="height:90px;border-radius:12px;"></div>
+        <div class="skeleton" style="height:90px;border-radius:12px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="page-regioes" class="page">
+    <div class="page-header">
+      <div>
+        <div class="page-title">Regiões</div>
+        <div class="page-desc">Distribuição e participação por grande região</div>
+      </div>
+      <button class="refresh-btn" onclick="loadAll()">
+        <span class="icon">↺</span> Atualizar
+      </button>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">VOLUME POR REGIÃO</div>
+        <div id="ranking-chart-2">
+          <div class="skeleton" style="margin-bottom:12px;"></div>
+          <div class="skeleton" style="margin-bottom:12px;width:80%"></div>
+          <div class="skeleton" style="width:55%"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">FATIA DO TOTAL</div>
+        <div id="donut-wrap-2">
+          <div class="loading-text" style="color:var(--muted);font-size:13px;padding:40px 0;text-align:center;">carregando...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="page-faixas" class="page">
+    <div class="page-header">
+      <div>
+        <div class="page-title">Faixas Etárias</div>
+        <div class="page-desc">Heatmap de posse por faixa etária e região</div>
+      </div>
+      <button class="refresh-btn" onclick="loadAll()">
+        <span class="icon">↺</span> Atualizar
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">HEATMAP — INTENSIDADE DE POSSE</div>
+      <div class="heatmap-wrap">
+        <table class="heatmap-table">
+          <thead>
+            <tr>
+              <th>Faixa etária</th>
+              <th>Norte</th>
+              <th>Nordeste</th>
+              <th>Sudeste</th>
+              <th>Sul</th>
+              <th>Centro-Oeste</th>
+            </tr>
+          </thead>
+          <tbody id="heatmap-body">
+            <tr><td colspan="6" style="color:var(--muted);padding:20px;">Carregando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0;">
+      <div class="card-title">LEGENDA DE INTENSIDADE</div>
+      <div style="display:flex;gap:16px;align-items:center;font-size:12px;font-family:'DM Mono',monospace;">
+        <span style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--surface2);"></span> Baixo</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#7aa8ff;"></span> Médio-baixo</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#5588ff;"></span> Médio</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#3366f5;"></span> Médio-alto</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--green);"></span> Alto</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="page-endpoints" class="page">
+    <div class="page-header">
+      <div>
+        <div class="page-title">Endpoints</div>
+        <div class="page-desc">Teste e inspecione cada rota da API em tempo real</div>
+      </div>
+      <button class="refresh-btn" onclick="loadAll()">
+        <span class="icon">↺</span> Testar Todos
+      </button>
+    </div>
+
+    <div class="ep-grid" id="ep-list"></div>
+
+    <div class="response-panel" id="response-panel" style="display:none;">
+      <div class="response-header">
+        <span class="response-label">RESPOSTA JSON</span>
+        <span class="response-status-text" id="resp-status"></span>
+      </div>
+      <pre class="response-body" id="resp-body"></pre>
+    </div>
+  </div>
+
+</main>
+
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span class="toast-msg"></span>
+</div>
+
+<script src="script.js"></script>
+<script>
+  const _renderRanking = renderRanking;
+  window.renderRanking = function(data) {
+    _renderRanking(data);
+    // also render into regioes page
+    const el2 = document.getElementById('ranking-chart-2');
+    if (!el2) return;
+    if (!data || !data.length) { el2.innerHTML = '<p style="color:var(--muted);font-size:13px;">Sem dados</p>'; return; }
+    const max = Math.max(...data.map(d => d.total));
+    el2.innerHTML = data.map(d => {
+      const pct = Math.round((d.total / max) * 100);
+      const color = REGION_COLORS[d.regiao] || 'var(--accent)';
+      return `<div class="bar-item">
+        <div class="bar-header">
+          <span class="bar-name">${d.regiao}</span>
+          <span class="bar-val">${d.total.toLocaleString('pt-BR')}</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="background:${color};" data-width="${pct}"></div></div>
+      </div>`;
+    }).join('');
+    requestAnimationFrame(() => el2.querySelectorAll('.bar-fill').forEach(b => b.style.width = b.dataset.width + '%'));
+  };
+
+  const _renderDonut = renderDonut;
+  window.renderDonut = function(data) {
+    _renderDonut(data);
+    const el2 = document.getElementById('donut-wrap-2');
+    if (!el2 || !data || !data.length) return;
+    const size = 140, cx = 70, cy = 70, r = 52, stroke = 22;
+    const circ = 2 * Math.PI * r;
+    let off = 0;
+    const slices = data.map(d => {
+      const color = REGION_COLORS[d.regiao] || '#4f7cff';
+      const dl = (d.percentual / 100) * circ;
+      const rot = (off / circ) * 360 - 90;
+      off += dl;
+      return { color, dl, dashGap: circ - dl, rot, ...d };
+    });
+    const svgSlices = slices.map(s =>
+      `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${stroke}"
+        stroke-dasharray="${s.dl} ${s.dashGap}" transform="rotate(${s.rot}, ${cx}, ${cy})"/>`
+    ).join('');
+    const legend = data.map(d => {
+      const color = REGION_COLORS[d.regiao] || '#4f7cff';
+      return `<div class="legend-item"><span class="legend-dot" style="background:${color}"></span><span class="legend-name">${d.regiao}</span><span class="legend-pct">${d.percentual}%</span></div>`;
+    }).join('');
+    el2.innerHTML = `<div class="donut-wrap"><svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="flex-shrink:0;"><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#1a1e28" stroke-width="${stroke}"/>${svgSlices}<text x="${cx}" y="${cy}" text-anchor="middle" dy="5" font-size="13" fill="#e8eaf0" font-family="Syne,sans-serif" font-weight="700">100%</text></svg><div class="donut-legend">${legend}</div></div>`;
+  };
+</script>
+</body>
+</html>

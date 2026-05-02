@@ -17,7 +17,6 @@ from .views import DominanteRegiaoView
 from .views import DashboardBuildView
 
 
-# lista de rotas da app
 urlpatterns = [
 
     path(

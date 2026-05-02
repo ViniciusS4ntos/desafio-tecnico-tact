@@ -271,7 +271,7 @@ function renderResponse(key) {
   if (epCode) { epCode.textContent = '200'; epCode.style.color = 'var(--green)'; }
 
   const raw = JSON.stringify(cached.data, null, 2);
-  bodyEl.innerHTML = syntaxHighlight(raw.slice(0, 2000) + (raw.length > 2000 ? '\n\n… (truncado)' : ''));
+  bodyEl.innerHTML = syntaxHighlight(raw.slice(0, 2000) + (raw.length > 2000 ? '\n\n}' : ''));
 }
 
 function syntaxHighlight(json) {

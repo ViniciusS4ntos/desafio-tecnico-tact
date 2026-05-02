@@ -1,10 +1,8 @@
 from .models import CensoCelular
 
 def get_censo():
-        # Buscar no banco todos os dados
         dados = CensoCelular.objects.all().values()
 
-        # retorna os dados
         return ({
             "total_registros" : dados.count(),
             "dados": list(dados)
@@ -22,12 +20,10 @@ def get_summary():
     for item in dados:
         nome = item.grupo_idade.strip().lower()
 
-        # pega a linha Total
         if nome == "total":
             total = item
             continue
 
-        # ignora categorias agregadas
         if nome in ignorar:
             continue
 
@@ -92,7 +88,7 @@ def get_participacao_percentual():
 
     total = None
 
-    # achar linha Total
+
     for item in dados:
         nome = item.grupo_idade.strip().lower()
 
@@ -142,12 +138,10 @@ def get_heatmap():
     for item in dados:
         nome = item.grupo_idade.strip().lower()
 
-        # começa após Total
         if nome == "total":
             capturando = True
             continue
 
-        # parou quando chegou em Homens
         if nome == "homens":
             break
 
@@ -170,7 +164,6 @@ def get_dominante_por_regiao():
     capturando = False
     faixas = []
 
-    # pega somente faixa geral
     for item in dados:
         nome = item.grupo_idade.strip().lower()
 

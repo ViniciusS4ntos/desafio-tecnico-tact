@@ -1,16 +1,11 @@
 from django.shortcuts import render
 
-# criar  endpointer
+
 from rest_framework.views import APIView
 
-# resposta json
 from rest_framework.response import Response
 
-# importa nosso model que representa a tabela censo_celular
-from .models import CensoCelular
-
-from .service import get_summary, get_ranking_regioes, get_heatmap, get_participacao_percentual, get_dominante_por_regiao, get_censo, build_dashboard
-
+from .service import *
 
 
 class CensoCelularView(APIView):

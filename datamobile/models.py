@@ -1,6 +1,5 @@
 from django.db import models
 
-# Entity
 class CensoCelular(models.Model):
 
     id = models.BigAutoField(primary_key=True)
@@ -13,7 +12,7 @@ class CensoCelular(models.Model):
     centro_oeste = models.BigIntegerField()
 
     class Meta:
-        db_table = "posse_celular_2005"
+        db_table = "censo_celular"
 
     def __str__(self):
         return self.grupo_idade

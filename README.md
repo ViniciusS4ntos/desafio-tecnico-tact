@@ -1,9 +1,5 @@
 # Desafio Técnico Tact
 
-Base de dados escolhida:
-
-![base de dados](imagensREADME/baseDados.png)
-
 **Base título:** Tabelas - Posse de telefone móvel celular para uso pessoal  
 **Tabela escolhida:** Tabela 2.1.1 - Pessoas de 10 anos ou mais de idade que tinham telefone móvel celular para uso pessoal, por Grandes Regiões, segundo o sexo e os grupos de idade - 2005  
 **Fonte:** [ibge.gov.br](https://www.ibge.gov.br/estatisticas/downloads-estatisticas.html)
